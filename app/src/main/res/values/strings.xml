@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AndroidERestaurant</string>
-    <string name="home_starter">Choisissez votre entrée</string>
-    <string name="home_dish">Choisissez votre plat</string>
-    <string name="home_dessert">Choisissez votre dessert</string>
+    <string name="home_starter">Entrée</string>
+    <string name="home_dish">Plat</string>
+    <string name="home_dessert">Dessert</string>
 </resources>
