@@ -7,11 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import fr.isen.remont.androiderestaurant.databinding.ActivityHomeBinding
 
-
 class HomeActivity() : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,15 +19,15 @@ class HomeActivity() : AppCompatActivity() {
         setContentView(view)
 
         binding.btnStarter.setOnClickListener{
-            changeActivity(getString(R.string.home_starter))
+            changeActivity("Entrées")
         }
 
         binding.btnDish.setOnClickListener{
-            changeActivity(getString(R.string.home_dish))
+            changeActivity("Plats")
         }
 
         binding.btnDessert.setOnClickListener{
-            changeActivity(getString(R.string.home_dessert))
+            changeActivity("Desserts")
         }
 
     }

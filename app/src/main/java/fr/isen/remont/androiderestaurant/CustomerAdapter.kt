@@ -1,30 +1,47 @@
 package fr.isen.remont.androiderestaurant
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
+import fr.isen.remont.androiderestaurant.databinding.CardViewDesignBinding
+import fr.isen.remont.androiderestaurant.model.DishModel
 
-class CustomAdapter(private val mList: List<ItemViewModel>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(val mList: List<DishModel>, val onDishClicked: (DishModel) -> Unit) : RecyclerView.Adapter<CustomAdapter.DishViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_view_design, parent, false)
+    class DishViewHolder(binding: CardViewDesignBinding):RecyclerView.ViewHolder(binding.root){
+        val dishPicture = binding.imageChoice
+        val dishName = binding.textChoice
+        val dishPrice = binding.priceChoice
 
-        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DishViewHolder {
+        val binding = CardViewDesignBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
 
-        val ItemsViewModel = mList[position]
+        return DishViewHolder(binding)
+    }
 
-        // sets the image to the imageview from our itemHolder class
-        holder.imageView.setImageResource(ItemsViewModel.image)
+    override fun onBindViewHolder(holder: DishViewHolder, position: Int) {
+
+        val dish = mList[position]
 
         // sets the text to the textview from our itemHolder class
-        holder.textView.text = ItemsViewModel.text
+        holder.dishName.text = dish.name_fr
+
+        // sets the text to the priceview from our itemHolder class
+        holder.dishPrice.text = dish.prices[0].price + "€"
+
+        Picasso.get()
+            .load(if (dish.images[0].isNotEmpty()) dish.images[0] else null)
+            .error(R.drawable.pitichat).placeholder(R.drawable.pitichat)
+            .resize(60,60)
+            .into(holder.dishPicture)
+
+        holder.itemView.setOnClickListener{
+            onDishClicked(dish)
+        }
 
     }
 
@@ -32,8 +49,4 @@ class CustomAdapter(private val mList: List<ItemViewModel>) : RecyclerView.Adapt
         return mList.size
     }
 
-    class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.imageview)
-        val textView: TextView = itemView.findViewById(R.id.textView)
-    }
 }
