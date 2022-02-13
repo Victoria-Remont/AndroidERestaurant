@@ -4,13 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import fr.isen.remont.androiderestaurant.databinding.ActivityDishBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
+import com.android.volley.toolbox.*
 import com.google.gson.Gson
 import fr.isen.remont.androiderestaurant.model.DishModel
 import fr.isen.remont.androiderestaurant.model.DishResultModel
@@ -25,8 +23,8 @@ class DishActivity : AppCompatActivity() {
 
         binding = ActivityDishBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val category = intent.getStringExtra( "category_type")
-        binding.mainDishTitle.text = category
+        val category : DISHES= intent.getSerializableExtra (TRANSFERT) as DISHES
+        binding.mainDishTitle.setText(category.nameId)
 
         // getting the recyclerview by its id
         val recyclerview = binding.recyclerview
@@ -46,10 +44,10 @@ class DishActivity : AppCompatActivity() {
                 var gson= Gson()
                 var dishResult = gson.fromJson(response.toString(), DishResultModel::class.java)
 
-                when (binding.mainDishTitle.text){
-                    "Entrées" -> displayDishes(dishResult.data[0].items)
-                    "Plats" -> displayDishes(dishResult.data[1].items)
-                    "Desserts" -> displayDishes(dishResult.data[2].items)
+                when (category){
+                    DISHES.STARTER -> displayDishes(dishResult.data[0].items)
+                    DISHES.MAIN -> displayDishes(dishResult.data[1].items)
+                    DISHES.DESSERT -> displayDishes(dishResult.data[2].items)
                 }
 
 

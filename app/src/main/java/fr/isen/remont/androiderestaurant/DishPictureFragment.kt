@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import fr.isen.remont.androiderestaurant.databinding.FragmentDishPictureBinding
 
 
@@ -21,16 +22,13 @@ class DishPictureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //afficher la photo
+        val url = arguments?.getString(URL)
+        url?.let { if (url.isNotEmpty()) Picasso.get().load(url).into(binding.imageView) }
     }
 
     companion object{
         fun newInstance(pictureUrl: String) =
-            DishPictureFragment().apply {
-                arguments = Bundle().apply {
-                    putString("picture_url", pictureUrl)
-                }
-            }
-
+            DishPictureFragment().apply { arguments=Bundle().apply{putString(URL,pictureUrl)} }
+        const val URL = "URL"
     }
 }

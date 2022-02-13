@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import fr.isen.remont.androiderestaurant.databinding.ActivityHomeBinding
 
+const val TRANSFERT = "category_type"
+
 class HomeActivity() : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
@@ -18,23 +20,28 @@ class HomeActivity() : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        // binding the buttons of the home page, leading to the starter, main dish and dessert page
         binding.btnStarter.setOnClickListener{
-            changeActivity("Entrées")
+            changeActivity(DISHES.STARTER)
+            Log.e("Starter page opened","HomeActivity closed")
         }
 
         binding.btnDish.setOnClickListener{
-            changeActivity("Plats")
+            changeActivity(DISHES.MAIN)
+            Log.e("Main dish page opened","HomeActivity closed")
         }
 
         binding.btnDessert.setOnClickListener{
-            changeActivity("Desserts")
+            changeActivity(DISHES.DESSERT)
+            Log.e("Dessert page opened","HomeActivity closed")
         }
 
     }
 
-    private fun changeActivity(category: String){
+    private fun changeActivity(category: DISHES){
         val intent = Intent(this, DishActivity::class.java)
-        intent.putExtra("category_type", category)
+        intent.putExtra(TRANSFERT, category)
+        Log.i("INFO", "End of HomeActivity")
         startActivity(intent)
     }
 
