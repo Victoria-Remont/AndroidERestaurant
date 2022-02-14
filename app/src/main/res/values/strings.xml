@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidERestaurant</string>
+    <string name="app_name">KittyCafeRemont</string>
     <string name="home_starter">Entrée</string>
     <string name="home_dish">Plat</string>
     <string name="home_dessert">Dessert</string>

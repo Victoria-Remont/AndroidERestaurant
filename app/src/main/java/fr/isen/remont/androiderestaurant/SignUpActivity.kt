@@ -87,7 +87,7 @@ class UserActivity : AppCompatActivity(), SignUpActivityFragmentInteraction {
                 if(userResult.data != null) {
                     saveUser(userResult.data)
                 } else {
-                    Snackbar.make(binding.root, R.string.loginerror, Snackbar.LENGTH_LONG).show()
+                    //Snackbar.make(binding.root, R.string.loginerror, Snackbar.LENGTH_LONG).show()
                 }
             },
             { error ->
@@ -122,7 +122,7 @@ class UserActivity : AppCompatActivity(), SignUpActivityFragmentInteraction {
         if(verifyInformations(email, password, lastname, firstname, isfromLogin)) {
             launchRequest(email, password, lastname, firstname, isfromLogin)
         } else {
-            Snackbar.make(binding.root, R.string.registrationerror, Snackbar.LENGTH_LONG).show()
+            //Snackbar.make(binding.root, R.string.registrationerror, Snackbar.LENGTH_LONG).show()
         }
     }
 
