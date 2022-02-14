@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import android.util.Log
+import android.widget.Toolbar
 import fr.isen.remont.androiderestaurant.databinding.ActivityHomeBinding
 
 const val TRANSFERT = "category_type"
@@ -35,6 +36,8 @@ class HomeActivity() : AppCompatActivity() {
             changeActivity(DISHES.DESSERT)
             Log.e("Dessert page opened","HomeActivity closed")
         }
+
+
 
     }
 
